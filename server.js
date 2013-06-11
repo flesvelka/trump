@@ -2,7 +2,7 @@
 // 8888番ポートでクライアントの接続を待ち受ける
 var ws = require('websocket.io');
 var server = ws.listen(8080, function () {
-  console.log('\033[96m Server running at 172.16.145.136:8888 \033[39m');
+  console.log('\033[96m Server running at 172.16.145.136:8080 \033[39m');
 });
 
 // クライアントからの接続イベントを処理

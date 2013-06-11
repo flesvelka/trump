@@ -1,7 +1,0 @@
-{
-  "version": "v0.6.18",
-  "npm": false,
-  "main": "chat_client.js",
-  "args": [],
-  "envs": {}
-}
