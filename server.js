@@ -1,24 +1,18 @@
-// VMware上のCentOS6で動作させたときの例
-// 8888番ポートでクライアントの接続を待ち受ける
-var ws = require('socket.io');
-var server = ws.listen(8080, function () {
-  console.log('\033[96m Server running at 172.16.145.136:8080 \033[39m');
+var fs = require('fs');
+var app = require('http').createServer( function (req, res) {
+    fs.readFile(__dirname + '/index.html', function (err, data) {
+        if (err) return res.writeHead(500);
+
+        res.writeHead(200);
+        res.end(data);
+    });
 });
 
-// クライアントからの接続イベントを処理
-server.on('connection', function(socket) {
-  // クライアントからのメッセージ受信イベントを処理
-  socket.on('message', function(data) {
-    // 実行時間を追加
-    var data = JSON.parse(data);
-    var d = new Date();
-    data.time = d.getFullYear()  + "-" + (d.getMonth() + 1) + "-" + d.getDate() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
-    data = JSON.stringify(data);
-    console.log('\033[96m' + data + '\033[39m');
-    
-    // 受信したメッセージを全てのクライアントに送信する
-    server.clients.forEach(function(client) {
-      client.send(data);
+var io = require('socket.io').listen(app, { log: false });
+io.sockets.on('connection', function (socket) {
+    socket.on('pulse', function (data) {
+        socket.emit('pulse', data ? data * 2 : 0);
     });
-  });
 });
+
+app.listen(80);
