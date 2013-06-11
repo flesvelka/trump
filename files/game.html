@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="page.css">
+	</head>
+	<body>
+		<script src="./hands.js">/* 手札を配る */</script>
+		<script src="./rule.js">/* いろいろやってくれる */</script>
+
+		<div id = "container">
+			<div id = "top-left">Room X</div>
+			<div id = "top">3P</div>
+			<div id = "top-right">
+				<button type="button" onclick="">Option</button>
+				<button type="button" onclick="">Help</button>
+			</div>
+
+			<div id = "left">2P</div>
+			<div id = "center">
+				<img src="./cards/blank.jpg" ></img>
+				<img src="./cards/blank.jpg" style="margin-left: -60px"></img>
+				<img src="./cards/blank.jpg" style="margin-left: -60px"></img>
+				<img src="./cards/blank.jpg" style="margin-left: -60px"></img>
+			</div>
+			<div id = "center-bottom">
+				<button type="button" onclick="">出す</button>
+				<button type="button" onclick="">パス</button>
+				<button onclick="hand_reload()">test</button>
+			</div>
+			<div id = "right">4P</div>
+			<div id = "log">log</div>
+
+			<div id = "bottom">
+
+			</div>
+			<div id = "bottom-right">
+				<button onclick="deal(); hand_reload()">Start</button><br>
+				<button type="button" onclick="robby.html">Exit</button>
+			</div>
+		</div>
+	</body>
+</html>
