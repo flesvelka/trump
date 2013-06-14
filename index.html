@@ -1,3 +1,4 @@
+<!--
 <html>
   <title>Socket.IO pulse test</title>
   <head>
@@ -32,4 +33,59 @@ socket.on('pulse', function (data) {
 </pre>
 
   </body>
+</html>
+-->
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/plain"/>
+  <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+ネクストジェネレーション チャット
+ 
+Sorry, Japanese only.
+ 
+<script>
+  var socket = new io.connect('http://hostname.domainname:30800');
+ 
+  // 接続直後にサーバから来るメッセージをコンソールに出力
+  // 画面には出ない。そしてサーバに返事をする。
+  socket.on('news', function(msg){
+    console.log(msg.msg);
+    socket.emit('resp', { resp: 'hello world from client' });
+  });
+ 
+  // ブロードキャストがあった（誰かが発言した）時、メッセージを
+  // ログに追加する
+  socket.on('said', function(msg){
+    console.log("said from server");
+    append(msg.msg);
+  });
+ 
+  // 発言する時用関数
+  // もうねjQueryとか使えよっていう
+  function say(){
+    if(window.event.keyCode == 13){
+      msgForm = document.getElementById("msg");
+      socket.emit('say', { msg: msgForm.value });
+      // 自分が発言したやつはブロードキャストで返ってこないので、
+      // 自分で追加する。
+      append(msgForm.value);
+      msgForm.value = "";
+      msgForm.focus();
+    }
+  }
+ 
+  // ログを記録する。
+  function append(msg){
+    log = document.getElementById("log");
+    // なんかsyntax highlightenerがおかしいのでbrタグ変な風に書いてる
+    log.innerHTML = log.innerHTML + "<" + "br/>" + msg;
+  }
+</script>
+<hr/>
+<input type="text" name="msg" size="80" id="msg" onkeypress="say();"/>
+<div id="log"></div>
+</body>
 </html>
