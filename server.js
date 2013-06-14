@@ -8,11 +8,11 @@ var app = require('http').createServer( function (req, res) {
     });
 });
 
-var io = require('socket.io').listen(app, { log: false });
-io.sockets.on('connection', function (socket) {
-    socket.on('pulse', function (data) {
-        socket.emit('pulse', data ? data * 2 : 0);
-    });
-});
+//var io = require('socket.io').listen(app, { log: false });
+//io.sockets.on('connection', function (socket) {
+//    socket.on('pulse', function (data) {
+//        socket.emit('pulse', data ? data * 2 : 0);
+//    });
+//});
 
-app.listen(80);
+// app.listen(80);
