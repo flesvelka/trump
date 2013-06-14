@@ -1,6 +1,6 @@
 var fs = require('fs');
 var app = require('http').createServer( function (req, res) {
-    fs.readFile(__dirname + '/index.html', function (err, data) {
+    fs.readFile(__dirname + '/game.html', function (err, data) {
         if (err) return res.writeHead(500);
 
         res.writeHead(200);
